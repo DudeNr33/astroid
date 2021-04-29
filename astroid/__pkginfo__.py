@@ -28,9 +28,14 @@
 
 from pkg_resources import DistributionNotFound, get_distribution
 
+default_version = "2.5.7+"
 try:
     __version__ = get_distribution("astroid").version
 except DistributionNotFound:
-    __version__ = "2.5.7+"
+    __version__ = default_version
+
+if __version__.startswith("0.1."):
+    # The legacy astroid tags are not working properly (?)
+    __version__ = default_version
 
 version = __version__
